@@ -12,19 +12,27 @@ $unrelated_concept_symptoms = array();
 $unrelated_concept_symptoms_number = array();
 $info_num = array();
 
+//计算无关联因子的症状分组集合。
+mergeGroupSymptom($unrelated_concepts);//匹配每个分组的症状列表
+$unrelated_groupSymps = mergeGroupSymp($unrelated_concepts);//计算每个分组症状的交集集合
+$unrelated_total_symps = merge_unrelated_symptoms($unrelated_groupSymps);
+$info_num["unrelated_symptoms_number"] = getSympNumberOfGroup($unrelated_concepts,$unrelated_groupSymps);
+$_SESSION["unrelated_groupSymps"] = json_encode($unrelated_groupSymps);
+$_SESSION["unrelated_concepts"] = json_encode($unrelated_concepts);
+
+
 //计算关联因子的症状分组集合。
 mergeGroupSymptom($concepts);//匹配每个分组的症状列表
 $related_groupSymps = intersectionGroupSymp($concepts);//计算每个分组症状的交集集合
+//将无关症状筛选出去
+foreach($related_groupSymps as $group_id=>$groupSymp){
+    $related_groupSymps[$group_id] = array_diff($groupSymp,$unrelated_total_symps);
+}
 $info_num["related_symptoms_number"] = getSympNumberOfGroup($concepts,$related_groupSymps);
 $_SESSION["related_groupSymps"] = json_encode($related_groupSymps);
 $_SESSION["concepts"] = json_encode($concepts);
 
-//计算无关联因子的症状分组集合。
-mergeGroupSymptom($unrelated_concepts);//匹配每个分组的症状列表
-$unrelated_groupSymps = mergeGroupSymp($unrelated_concepts);//计算每个分组症状的交集集合
-$info_num["unrelated_symptoms_number"] = getSympNumberOfGroup($unrelated_concepts,$unrelated_groupSymps);
-$_SESSION["unrelated_groupSymps"] = json_encode($unrelated_groupSymps);
-$_SESSION["unrelated_concepts"] = json_encode($unrelated_concepts);
+
 
 echo $_SESSION["info_num"] = json_encode($info_num);
 
@@ -151,5 +159,21 @@ function merge($words,$group_index){
 	}
 }
 
+function merge_unrelated_symptoms($related_groupSymps){
+    if(count($related_groupSymps)<1){
+        return array();
+    }else if(count($related_groupSymps)==1){
+        return $related_groupSymps[0];
+    }else{
 
+        $merges = $related_groupSymps[0];
+        while(next($related_groupSymps)){
+
+            $newSymp =$related_groupSymps[key($related_groupSymps)];
+
+            $merges = array_merge($merges,$newSymp);
+        }
+        return array_values(array_unique($merges));
+    }
+}
 ?>

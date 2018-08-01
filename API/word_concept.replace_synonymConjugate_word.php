@@ -10,7 +10,6 @@ else
 	$synonyms = array();
 
 $words = json_decode($_SESSION["word"],TRUE);
-//print_r($words);
 searchConjugateOrSynonym($words);//替换关联因子的数据
 $concepts = array_values($concepts);
 $_SESSION["synonyms"] = json_encode($new_synonyms);

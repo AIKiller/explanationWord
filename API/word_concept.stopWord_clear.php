@@ -38,7 +38,7 @@ echo  $user_inputer;
 //echo "<pre>";
 //print_r( breakUpStr($user_inputer));
 //echo "</pre>";
-//根据逗号和空格逐级打算数组，逗号为分组标志。
+//根据逗号和空格逐级打算数组，逗号为分组标志。第一步
 function breakUpStr($str){
 	$group_strs = array();
 	$breakUpStrs = array();

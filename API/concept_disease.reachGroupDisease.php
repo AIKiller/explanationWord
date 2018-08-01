@@ -9,15 +9,15 @@ $diseaseDetails = array();
 $resultToPage = array();
 $related_groupSymps = json_decode($_SESSION["related_groupSymps"],true);
 $concepts = json_decode($_SESSION["concepts"],true);
-//echo date('H:i:s',time())."<br>";
+
 $diseaseList = getDiseasesByGroupSymp($related_groupSymps);
-//echo date('H:i:s',time())."<br>";
+
 $diseaseRelatedSymp = getDiseaseRelatedSymp($diseaseList);
-//echo date('H:i:s',time())."<br>";
+
 $diseaseDetails = getDiseaseMarked($diseaseRelatedSymp);
-//echo date('H:i:s',time())."<br>";
+
 $disease_site_ids = getDiseaseSiteIds($diseaseDetails);
-//echo date('H:i:s',time())."<br>";
+
 $_SESSION["diseaseDetails"] = json_encode($diseaseDetails);
 $_SESSION["disease_site_ids"] = json_encode($disease_site_ids);
 echo json_encode($resultToPage);

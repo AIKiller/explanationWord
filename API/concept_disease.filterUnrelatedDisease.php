@@ -60,7 +60,7 @@
 			{
 				$unrelated_groupDisease = $temp_unrelated_groupDisease[$key];													//
 			}else{
-				$unrelated_groupDisease = array_intersect($temp_unrelated_groupDisease[$key],$unrelated_groupDisease);	//取交集
+				$unrelated_groupDisease = array_merge($temp_unrelated_groupDisease[$key],$unrelated_groupDisease);	//并集
 			}
 			$tempKey++;
 		

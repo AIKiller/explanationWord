@@ -1,4 +1,6 @@
 <?php
+//该脚本被废。
+exit;
 //根据用户输入的无关因子单词，清洗每个分组下的症状列表
 $unrelated_groupSymps = json_decode($_SESSION["unrelated_groupSymps"],true);
 if(count($unrelated_groupSymps) == 0){
