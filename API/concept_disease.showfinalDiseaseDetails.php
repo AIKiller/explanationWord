@@ -1,20 +1,20 @@
 <?php
 	include("../logic/common.inc.php");	
-	$a = isset($_GET["a"])?$_GET["a"]:$_SESSION['setting_a'];
-	$b = isset($_GET["b"])?$_GET["b"]:$_SESSION['setting_a'];
+    //获取用户基本信息
 	if(isset($_SESSION["userInformationSet"])){
 		$userInformationSet = json_decode($_SESSION["userInformationSet"],true);
 	}
-	$_SESSION['setting_a'] = $a;
-	$_SESSION['setting_b'] = $b;
-	
+
 	$db = getDB();
-	
+	$max_number_diseases = getMaxNumberDiseases();  //the total number of diseases in databases;
 	$finalDiseaseSet = json_decode($_SESSION["finalDisease"],true);				//获取疾病（一维数组）
 	//print_r($finalDiseaseSet);
-	
-	$diseaseDetails = json_decode($_SESSION["diseaseDetails"],true);			//疾病详情
-	if(count($finalDiseaseSet)==0){
+	$diseaseDetails = json_decode($_SESSION["diseaseDetails"],true);			//疾病详情 {"A01":{"marked":["symp8049","symp8050","symp8051","symp8052","symp8053"],"all_symp":["symp8049","symp8050","symp8051","symp8052","symp8053"]}}
+	$number_eliminated_diseases = $max_number_diseases-count($finalDiseaseSet);    //the total eliminated number of diseases in process;
+    echo $spec = $number_eliminated_diseases/$max_number_diseases; //Spec is short name of specificity.
+
+    //开始运行获取最终的疾病结果
+    if(count($finalDiseaseSet)==0){//最终疾病结果为空时
 		$_SESSION["finalDieseaseDetails"] = array();
 		$finalDiseasePage["finalDisease"] = array();
 		$finalDiseasePage["multi-morbidity"] = $_SESSION["multi-morbidity"];
@@ -49,51 +49,35 @@
 
 	$number = 0;
 	foreach($finalDiseaseDetailSet as $disease_site_id =>$disease_details){
+	    echo "disease_id:".$disease_site_id;
 		$diseaseInfo = getDiseaseName_PrevFromDB($disease_site_id);//查询数据库 获取疾病的名称和prev_rf。
 		$finalDiseaseToPage[$number]["disease_site_id"] = $disease_site_id;
 		$finalDiseaseToPage[$number]["disease_name"] = $diseaseInfo["disease_name"];
 		$finalDiseaseToPage[$number]["prev_rf"] = round($diseaseInfo["prev_rf"],2);
+        $p = round($diseaseInfo["prev_rf"],2)/10;
 		$finalDiseaseToPage[$number]["status"] = $diseaseInfo["status"];
 		$finalDiseaseToPage[$number]["diseaseDescripted_num"] = count($disease_details["marked"]);
 		$finalDiseaseToPage[$number]["details"] = count($disease_details["marked"])."/".count($disease_details["all_symp"]);
-		$percentage = count($disease_details["marked"])/count($disease_details["all_symp"]);
-		/*if($percentage<0.5){
-			$finalDiseaseToPage[$number]["color"] = "danger";//css标签名字-》红色
-		}else{
-			$finalDiseaseToPage[$number]["color"] = "info";//css标签名字-》绿色
-		}*/
-		$finalDiseaseToPage[$number]["percentage"] = (int)($percentage*100);
+		$sens = count($disease_details["marked"])/count($disease_details["all_symp"]); //Sens is short name for sensitivity and is equal to R
+		$finalDiseaseToPage[$number]["percentage"] = (int)($sens*100);
+        $finalDiseaseToPage[$number]["PVW"]=getPVW($sens, $spec, $p);
+        $finalDiseaseToPage[$number]["NVW"]=getNVW ($sens, $spec, $p);
 		$number ++;
 	}
-	
+    //获取两个参数的最大值
 	$prevMax = getMaxFromArray($finalDiseaseToPage,"prev_rf");
 	$percentageMax = getMaxFromArray($finalDiseaseToPage,"percentage");
 
-	foreach($finalDiseaseToPage as $index => $diseaseInfo){
 
-		$finalDiseaseToPage[$index]["comb"] = calculateComb($diseaseInfo);
-
-	}
-	
-	$combMax = getMaxFromArray($finalDiseaseToPage,"comb");
-
-	foreach($finalDiseaseToPage as $index => $diseaseInfo){	
-		
-		if($combMax == 0){
-			$finalDiseaseToPage[$index]["comb"] = 0;
-		}else{
-			$finalDiseaseToPage[$index]["comb"] = round($finalDiseaseToPage[$index]["comb"]/$combMax,2);
-		}
-	}
-
-	sortArrByField($finalDiseaseToPage,"comb",true);//二维数组排序。
-		
+    //准备要在页面显示的数组
 	$_SESSION["finalDieseaseDetails"] = json_encode($finalDiseaseDetailSet);
 	$_SESSION["finalDieseaseToPage"] = json_encode($finalDiseaseToPage);
 	$finalDiseasePage["finalDisease"] = $finalDiseaseToPage;
 	$finalDiseasePage["multi-morbidity"] = $_SESSION["multi-morbidity"];
 	echo json_encode($finalDiseasePage);
 
+
+	//以下为公用函数
 	function getDiseaseName_PrevFromDB($disease_site_id){
 		global $db,$userInformationSet;
 		$age = !isset($userInformationSet["age"])?0:$userInformationSet["age"];//储存用户的年龄信息
@@ -130,17 +114,6 @@
 							"lethality"=>$row["lethality"]
 					);
 		}
-		/*if($return_diseaseArr["prev_rf"] == 0){
-			$sql = "SELECT name_decode,disease_agelevel.prev_rf,min_age FROM disease_agelevel INNER JOIN disease ON disease_agelevel.site_id=disease.icpc  WHERE disease.site_id ='".$disease_site_id."' AND disease_agelevel.prev_rf >0 ORDER BY min_age DESC limit 0,1";
-			$result = $db->query($sql);
-			$num = $result->num_rows;
-			if($num > 0){
-				$row = $result->fetch_array();
-				$return_diseaseArr = array("disease_name"=>$row["name_decode"],
-							"prev_rf" => $row["prev_rf"]
-					);
-			}
-		}*/
 		if($return_diseaseArr["prev_rf"]< 0.5 && $return_diseaseArr["prev_rf"] >0){//如果查询到的疾病的prev_rf小于0.5，则认为该疾病为罕见疾病，则进行特殊显示（红色） 默认为绿色
 			$return_diseaseArr["status"] ="rare";//css标签名字-》翠绿色
 		}else{
@@ -219,6 +192,7 @@
 		if(count($general_awareness) == 0) return $finalDiseaseSet;
 		return array_diff($finalDiseaseSet,$general_awareness);
 	}
+	//从数组中获取指定字段的最大值
 	function getMaxFromArray($disease_array,$fields){
 		$maxValue = 0;
 		foreach($disease_array as $index => $diseaseInfo){
@@ -226,23 +200,27 @@
 		}
 		return $maxValue;
 	}
-	//正规化P和R值。计算两个维度的关联值
-	function calculateComb($diseaseInfo){
-		global $prevMax,$percentageMax,$a,$b;
-		if($prevMax == 0){
-			$p = 0;
-			$r = $diseaseInfo["percentage"]/$percentageMax;
-		}else if($percentageMax == 0){
-			$p = $diseaseInfo["prev_rf"]/$prevMax;
-			$r = 0;
-		}else{
-			$p = $diseaseInfo["prev_rf"]/$prevMax;
-			$r = $diseaseInfo["percentage"]/$percentageMax;
-		}
-		//计算每个因子与该因子最大值的商
+	//获取疾病的最大数目
+    function getMaxNumberDiseases(){
+	    global $db;
+	    $sql = "SELECT COUNT(1) FROM disease";
+	    return $db->query($sql)->fetch_array()[0];
+    }
 
-		return $a*$p+$b*$r;
-		//正规化
-		//return $comb = sqrt($a*($p*$p)+$b*($r*$r));
-	}
+
+    function getPVW($sens, $spec, $p){
+        echo "sens:".$sens."---->";
+        echo $alfa = getAlfa($sens,$spec);
+        echo "<br>";
+        return (100*$alfa*$p)/($alfa*$p +1-$p);
+    }
+    //工具函数
+    function getAlfa($sens,$spec){
+        return $sens/(1-$spec);
+    }
+
+    function getNVW ($sens, $spec, $p){
+        return 100*(1-$p) * $spec/((1-$p)*$spec + (1-$sens)*$p);
+    }
+
 ?>

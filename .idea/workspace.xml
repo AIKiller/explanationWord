@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4da1197a-df58-4237-be24-e1bf51704ad5" name="Default" comment="">
+    <list default="true" id="4da1197a-df58-4237-be24-e1bf51704ad5" name="Default" comment="修改新的参数版本的后台脚本，计算结果有些偏差，需要进行确认。">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/API/concept_disease.showfinalDiseaseDetails.php" afterPath="$PROJECT_DIR$/API/concept_disease.showfinalDiseaseDetails.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,75 +15,17 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="concept_disease.filterSymptomWithUnrelatedWord.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/API/concept_disease.filterSymptomWithUnrelatedWord.php">
+      <file leaf-file-name="concept_disease.showfinalDiseaseDetails.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/API/concept_disease.showfinalDiseaseDetails.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+              <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
               <folding>
-                <marker date="1534770265155" expanded="true" signature="391:460" ph="..." />
-                <marker date="1534770265155" expanded="true" signature="914:1073" ph="..." />
-                <marker date="1534770265155" expanded="true" signature="1129:1687" ph="..." />
-                <marker date="1534770265155" expanded="true" signature="1323:1652" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="concept_disease.filterUnrelatedDisease.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/API/concept_disease.filterUnrelatedDisease.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1860">
-              <caret line="62" column="120" lean-forward="false" selection-start-line="62" selection-start-column="120" selection-end-line="62" selection-end-column="120" />
-              <folding>
-                <marker date="1534770265161" expanded="true" signature="1377:1474" ph="SELECT DISTI... dis_symp" />
-                <marker date="1534770265161" expanded="true" signature="1655:1746" ph="{...}" />
-                <marker date="1534770265161" expanded="true" signature="1751:1863" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="concept_disease.mergeGroupSymptom.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/API/concept_disease.mergeGroupSymptom.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="131" column="43" lean-forward="true" selection-start-line="131" selection-start-column="43" selection-end-line="131" selection-end-column="43" />
-              <folding>
-                <marker date="1534770265166" expanded="true" signature="2937:3000" ph="SELECT conce... symp_concept" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="concept_disease.reachGroupDisease.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/API/concept_disease.reachGroupDisease.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding>
-                <marker date="1534770265171" expanded="true" signature="723:846" ph=" getDiseasesByGroupSymp* ..." />
-                <marker date="1534770265171" expanded="true" signature="902:1442" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="1005:1415" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="1035:1156" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="1168:1275" ph="SELECT DISTI... dis_symp" />
-                <marker date="1534770265171" expanded="true" signature="1347:1412" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="1447:1571" ph=" getDiseaseRelatedSymp* ..." />
-                <marker date="1534770265171" expanded="true" signature="1619:2085" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="1722:2054" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="1733:1873" ph="SELECT disea... dis_symp" />
-                <marker date="1534770265171" expanded="true" signature="1945:2051" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="2090:2287" ph=" getDiseaseMarked* ..." />
-                <marker date="1534770265171" expanded="true" signature="2337:2973" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="2482:2946" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="2545:2821" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="2978:3064" ph=" getDiseaseMarked* ..." />
-                <marker date="1534770265171" expanded="true" signature="3111:3347" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="3197:3318" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="3255:3315" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="3352:3432" ph=" getWordStr* ..." />
-                <marker date="1534770265171" expanded="true" signature="3474:3622" ph="..." />
-                <marker date="1534770265171" expanded="true" signature="3548:3586" ph="..." />
+                <marker date="1534774264405" expanded="true" signature="4085:4312" ph="SELECT name_... disease_agelevel" />
+                <marker date="1534774264405" expanded="true" signature="4865:4952" ph="SELECT name_... disease" />
+                <marker date="1534774264405" expanded="true" signature="6388:6570" ph="SELECT count... symp_concept" />
+                <marker date="1534774264405" expanded="true" signature="7036:7098" ph="SELECT keywo... concept" />
+                <marker date="1534774264405" expanded="true" signature="8005:8033" ph="SELECT COUNT... disease" />
               </folding>
             </state>
           </provider>
@@ -90,11 +33,17 @@
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>calculateComb</find>
+      <find>getMaxFromArray</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="b75ede5c6dfd389a5ead72a078a881420e22cd7b" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -102,6 +51,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/API/concept_disease.mergeGroupSymptom.php" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/API/concept_disease.showfinalDiseaseDetails.php" />
       </list>
     </option>
   </component>
@@ -281,38 +232,38 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="376000" />
+    <option name="totallyTimeSpent" value="4969000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2064" height="1128" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31396484" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998997" sideWeight="0.5019531" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4477539" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32998997" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998997" sideWeight="0.5019531" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.63891673" sideWeight="0.49804688" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31895688" sideWeight="0.49804688" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -325,7 +276,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40483162" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -391,6 +342,8 @@
     <ignored-roots>
       <path value="F:\xampp\htdocs\explanationWord\explanationWord" />
     </ignored-roots>
+    <MESSAGE value="修改新的参数版本的后台脚本，计算结果有些偏差，需要进行确认。" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改新的参数版本的后台脚本，计算结果有些偏差，需要进行确认。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -401,12 +354,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-          <folding>
-            <marker date="1534770265155" expanded="true" signature="391:460" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="914:1073" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="1129:1687" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="1323:1652" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -415,9 +363,7 @@
         <state relative-caret-position="1860">
           <caret line="62" column="120" lean-forward="false" selection-start-line="62" selection-start-column="120" selection-end-line="62" selection-end-column="120" />
           <folding>
-            <marker date="1534770265161" expanded="true" signature="1377:1474" ph="SELECT DISTI... dis_symp" />
-            <marker date="1534770265161" expanded="true" signature="1655:1746" ph="{...}" />
-            <marker date="1534770265161" expanded="true" signature="1751:1863" ph="..." />
+            <marker date="1534770770102" expanded="true" signature="1377:1474" ph="SELECT DISTI... dis_symp" />
           </folding>
         </state>
       </provider>
@@ -427,28 +373,8 @@
         <state relative-caret-position="330">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <marker date="1534770265171" expanded="true" signature="723:846" ph=" getDiseasesByGroupSymp* ..." />
-            <marker date="1534770265171" expanded="true" signature="902:1442" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1005:1415" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1035:1156" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1168:1275" ph="SELECT DISTI... dis_symp" />
-            <marker date="1534770265171" expanded="true" signature="1347:1412" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1447:1571" ph=" getDiseaseRelatedSymp* ..." />
-            <marker date="1534770265171" expanded="true" signature="1619:2085" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1722:2054" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1733:1873" ph="SELECT disea... dis_symp" />
-            <marker date="1534770265171" expanded="true" signature="1945:2051" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2090:2287" ph=" getDiseaseMarked* ..." />
-            <marker date="1534770265171" expanded="true" signature="2337:2973" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2482:2946" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2545:2821" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2978:3064" ph=" getDiseaseMarked* ..." />
-            <marker date="1534770265171" expanded="true" signature="3111:3347" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3197:3318" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3255:3315" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3352:3432" ph=" getWordStr* ..." />
-            <marker date="1534770265171" expanded="true" signature="3474:3622" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3548:3586" ph="..." />
+            <marker date="1534770770110" expanded="true" signature="1168:1275" ph="SELECT DISTI... dis_symp" />
+            <marker date="1534770770110" expanded="true" signature="1733:1873" ph="SELECT disea... dis_symp" />
           </folding>
         </state>
       </provider>
@@ -458,7 +384,7 @@
         <state relative-caret-position="2760">
           <caret line="92" column="25" lean-forward="false" selection-start-line="92" selection-start-column="25" selection-end-line="92" selection-end-column="25" />
           <folding>
-            <marker date="1534770265166" expanded="true" signature="2937:3000" ph="SELECT conce... symp_concept" />
+            <marker date="1534770770106" expanded="true" signature="2937:3000" ph="SELECT conce... symp_concept" />
           </folding>
         </state>
       </provider>
@@ -500,28 +426,8 @@
         <state relative-caret-position="330">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <marker date="1534770265171" expanded="true" signature="723:846" ph=" getDiseasesByGroupSymp* ..." />
-            <marker date="1534770265171" expanded="true" signature="902:1442" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1005:1415" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1035:1156" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1168:1275" ph="SELECT DISTI... dis_symp" />
-            <marker date="1534770265171" expanded="true" signature="1347:1412" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1447:1571" ph=" getDiseaseRelatedSymp* ..." />
-            <marker date="1534770265171" expanded="true" signature="1619:2085" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1722:2054" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1733:1873" ph="SELECT disea... dis_symp" />
-            <marker date="1534770265171" expanded="true" signature="1945:2051" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2090:2287" ph=" getDiseaseMarked* ..." />
-            <marker date="1534770265171" expanded="true" signature="2337:2973" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2482:2946" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2545:2821" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2978:3064" ph=" getDiseaseMarked* ..." />
-            <marker date="1534770265171" expanded="true" signature="3111:3347" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3197:3318" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3255:3315" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3352:3432" ph=" getWordStr* ..." />
-            <marker date="1534770265171" expanded="true" signature="3474:3622" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3548:3586" ph="..." />
+            <marker date="1534770770110" expanded="true" signature="1168:1275" ph="SELECT DISTI... dis_symp" />
+            <marker date="1534770770110" expanded="true" signature="1733:1873" ph="SELECT disea... dis_symp" />
           </folding>
         </state>
       </provider>
@@ -530,12 +436,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-          <folding>
-            <marker date="1534770265155" expanded="true" signature="391:460" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="914:1073" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="1129:1687" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="1323:1652" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -544,9 +445,7 @@
         <state relative-caret-position="1860">
           <caret line="62" column="125" lean-forward="false" selection-start-line="62" selection-start-column="125" selection-end-line="62" selection-end-column="125" />
           <folding>
-            <marker date="1534770265161" expanded="true" signature="1377:1474" ph="SELECT DISTI... dis_symp" />
-            <marker date="1534770265161" expanded="true" signature="1655:1746" ph="{...}" />
-            <marker date="1534770265161" expanded="true" signature="1751:1863" ph="..." />
+            <marker date="1534770770102" expanded="true" signature="1377:1474" ph="SELECT DISTI... dis_symp" />
           </folding>
         </state>
       </provider>
@@ -556,7 +455,7 @@
         <state relative-caret-position="-903">
           <caret line="95" column="34" lean-forward="true" selection-start-line="95" selection-start-column="34" selection-end-line="95" selection-end-column="34" />
           <folding>
-            <marker date="1534770265166" expanded="true" signature="2937:3000" ph="SELECT conce... symp_concept" />
+            <marker date="1534770770106" expanded="true" signature="2937:3000" ph="SELECT conce... symp_concept" />
           </folding>
         </state>
       </provider>
@@ -593,33 +492,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="6" lean-forward="true" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/API/concept_disease.reachGroupDisease.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
+        <state relative-caret-position="150">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <marker date="1534770265171" expanded="true" signature="723:846" ph=" getDiseasesByGroupSymp* ..." />
-            <marker date="1534770265171" expanded="true" signature="902:1442" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1005:1415" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1035:1156" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1168:1275" ph="SELECT DISTI... dis_symp" />
-            <marker date="1534770265171" expanded="true" signature="1347:1412" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1447:1571" ph=" getDiseaseRelatedSymp* ..." />
-            <marker date="1534770265171" expanded="true" signature="1619:2085" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1722:2054" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="1733:1873" ph="SELECT disea... dis_symp" />
-            <marker date="1534770265171" expanded="true" signature="1945:2051" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2090:2287" ph=" getDiseaseMarked* ..." />
-            <marker date="1534770265171" expanded="true" signature="2337:2973" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2482:2946" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2545:2821" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="2978:3064" ph=" getDiseaseMarked* ..." />
-            <marker date="1534770265171" expanded="true" signature="3111:3347" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3197:3318" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3255:3315" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3352:3432" ph=" getWordStr* ..." />
-            <marker date="1534770265171" expanded="true" signature="3474:3622" ph="..." />
-            <marker date="1534770265171" expanded="true" signature="3548:3586" ph="..." />
+            <marker date="1534770770110" expanded="true" signature="1168:1275" ph="SELECT DISTI... dis_symp" />
+            <marker date="1534770770110" expanded="true" signature="1733:1873" ph="SELECT disea... dis_symp" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API/concept_disease.mergeGroupSymptom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="137" column="5" lean-forward="true" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
+          <folding>
+            <marker date="1534770770106" expanded="true" signature="2937:3000" ph="SELECT conce... symp_concept" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API/concept_disease.filterUnrelatedDisease.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="62" column="120" lean-forward="false" selection-start-line="62" selection-start-column="120" selection-end-line="62" selection-end-column="120" />
+          <folding>
+            <marker date="1534770770102" expanded="true" signature="1377:1474" ph="SELECT DISTI... dis_symp" />
           </folding>
         </state>
       </provider>
@@ -628,33 +551,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-          <folding>
-            <marker date="1534770265155" expanded="true" signature="391:460" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="914:1073" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="1129:1687" ph="..." />
-            <marker date="1534770265155" expanded="true" signature="1323:1652" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API/concept_disease.filterUnrelatedDisease.php">
+    <entry file="file://$PROJECT_DIR$/API/concept_disease.showfinalDiseaseDetails.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1860">
-          <caret line="62" column="120" lean-forward="false" selection-start-line="62" selection-start-column="120" selection-end-line="62" selection-end-column="120" />
+        <state relative-caret-position="30">
+          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
           <folding>
-            <marker date="1534770265161" expanded="true" signature="1377:1474" ph="SELECT DISTI... dis_symp" />
-            <marker date="1534770265161" expanded="true" signature="1655:1746" ph="{...}" />
-            <marker date="1534770265161" expanded="true" signature="1751:1863" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API/concept_disease.mergeGroupSymptom.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="131" column="43" lean-forward="true" selection-start-line="131" selection-start-column="43" selection-end-line="131" selection-end-column="43" />
-          <folding>
-            <marker date="1534770265166" expanded="true" signature="2937:3000" ph="SELECT conce... symp_concept" />
+            <marker date="1534774264405" expanded="true" signature="4085:4312" ph="SELECT name_... disease_agelevel" />
+            <marker date="1534774264405" expanded="true" signature="4865:4952" ph="SELECT name_... disease" />
+            <marker date="1534774264405" expanded="true" signature="6388:6570" ph="SELECT count... symp_concept" />
+            <marker date="1534774264405" expanded="true" signature="7036:7098" ph="SELECT keywo... concept" />
+            <marker date="1534774264405" expanded="true" signature="8005:8033" ph="SELECT COUNT... disease" />
           </folding>
         </state>
       </provider>
