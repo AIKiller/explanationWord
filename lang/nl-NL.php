@@ -162,6 +162,8 @@ return array(
 		    ),
 		 "SORT_PARAMETER_R"			=> "sort R",
 		 "SORT_PARAMETER_P"			=> "sort P",
+        "SORT_PARAMETER_PVW"			=> "sort PVW",
+        "SORT_PARAMETER_NVW"			=> "sort NVW",
 		 "SORT_COMB"				=> "sort comb",
 		 "WITH_SAME_CLASS_DISEASE"	=> "Disease with same ICPC class:",
 		 "INCREMENTAL_HAVE" 		=> "wel",

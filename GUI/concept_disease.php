@@ -75,30 +75,6 @@
 			<div id="getFinalDisease"></div>
 			<!--<div id="debug"></div>-->
 		</div>
-		<!-- 设置comb中参数的 Modal -->
-		<div class="modal fade bs-example-modal-sm" id="combSettingsModal" tabindex="-1" role="dialog" aria-labelledby="combSettingsModal" style="overflow-y:hidden;">
-		  <div class="modal-dialog modal-sm" role="document" style="margin-top: 10%;">
-		    <div class="modal-content">
-		      <div class="modal-body">
-		      	<div style="width:75%;margin:auto;">
-			      	<h4><?php echo $langText["concept_disease"]["comb"]["COMB_SETTINGS"];?></h4>
-				    <div class="input-group" style="width: 101%;">
-		      			<div class="input-group-addon"><?php echo $langText["concept_disease"]["comb"]["COMB_PARAMETER_A"];?></div>
-		      			<input type="text" class="form-control" id="a" value="<?php echo isset($_SESSION['setting_a'])?$_SESSION['setting_a']:1 ?>">
-		    		</div>
-		    		<div class="input-group" style="width: 101%;">
-		      			<div class="input-group-addon"><?php echo $langText["concept_disease"]["comb"]["COMB_PARAMETER_B"];?></div>
-		      			<input type="text" class="form-control" id="b" value="<?php echo isset($_SESSION['setting_b'])?$_SESSION['setting_b']:1?>">
-		    		</div>
-
-	    		</div>
-		    </div>
-		    <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $langText["concept_disease"]["comb"]["CLOSE"];?></button>
-		    	<button type="button" class="btn btn-primary" onclick="sortForComb()" ><?php echo $langText["concept_disease"]["comb"]["SAVE"];?></button>
-		    </div>
-		  </div>
-		</div>
 
 	</body>
 <script>
@@ -263,8 +239,9 @@ function showFinalDiseaseToPaper(){
 				$("#reachGroupDisease").append('<button class="btn btn-danger" id="total" type="button" style="margin-left:8px;float:right;"><?php echo $langText["concept_disease"]["TOTAL"];?>=<span class="badge">'+number+'</span></button>');
 				buttonHtml = '<button class="btn btn-default" type="button" style="margin-left:8px;float: left;;" onclick="sortForR()"><?php echo $langText["concept_disease"]["SORT_PARAMETER_R"];?></button>';
 				buttonHtml += '<button class="btn btn-default" type="button" style="margin-left:8px;float: left;;" onclick="sortForP()"><?php echo $langText["concept_disease"]["SORT_PARAMETER_P"];?></button>';
-				buttonHtml += '<button class="btn btn-default" type="button" style="margin-left:8px;float: left;;" onclick="toggleCombSettings()"><?php echo $langText["concept_disease"]["SORT_COMB"];?></button>';
-				buttonHtml += '<div style="clear: both;"></div>';
+                buttonHtml += '<button class="btn btn-default" type="button" style="margin-left:8px;float: left;;" onclick="sortForPVW()"><?php echo $langText["concept_disease"]["SORT_PARAMETER_PVW"];?></button>';
+                buttonHtml += '<button class="btn btn-default" type="button" style="margin-left:8px;float: left;;" onclick="sortForNVW()"><?php echo $langText["concept_disease"]["SORT_PARAMETER_NVW"];?></button>';
+                buttonHtml += '<div style="clear: both;"></div>';
 				$("#sortFunction").html(buttonHtml);
 				if(show["multi-morbidity"] == 1){
 					parent.setProgress(100,'');
@@ -434,7 +411,7 @@ function setFinalDiseaseHtml(show){
 		}else if(show[index]["status"] == "lethality"){
 			Messages += '<button id="'+show[index]["disease_site_id"]+'" name="'+show[index]["disease_name"]+'" class="btn btn-danger" type="button" onclick="getDiseaseInfo(this.id,this.name)" style="margin-left:8px">';
 		}
-		Messages += '<div class="sm-screen-left"><span>'+show[index]["disease_name"]+'</span></div><div class="sm-screen-right"><span class="badge">'+show[index]["details"]+'</span><span class="badge">R:'+show[index]["percentage"]+'%</span><div class="comb"><span class="badge">P:'+show[index]["prev_rf"]+'</span><span class="badge" style="width:80px">Comb:'+show[index]["comb"]+'</span></div></div>';
+		Messages += '<div class="sm-screen-left"><span>'+show[index]["disease_name"]+'</span></div><div class="sm-screen-right"><span class="badge">'+show[index]["details"]+'</span><span class="badge">R:'+show[index]["percentage"]+'%</span><div class="comb"><span class="badge">P:'+show[index]["prev_rf"]+'</span><span class="badge" style="width:80px">PVW:'+show[index]["PVW"]+'</span><span class="badge" style="width:80px">NVW:'+show[index]["NVW"]+'</span></div></div>';
 		
 		
 		
@@ -516,6 +493,24 @@ function sortForP(){
 		
 	setFinalDiseaseHtml(_finalDiseases);
 }
+//按照PVW排序
+function sortForPVW(){
+    _finalDiseases = _finalDiseases.sort(function(a,b){
+        var offset =b["PVW"] - a["PVW"];
+        return offset;
+    });
+    setFinalDiseaseHtml(_finalDiseases);
+}
+
+//按照NVW排序
+function sortForNVW(){
+    _finalDiseases = _finalDiseases.sort(function(a,b){
+        var offset =b["NVW"] - a["NVW"];
+        return offset;
+    });
+    setFinalDiseaseHtml(_finalDiseases);
+}
+
 function toggleCombSettings(){
 	$("#combSettingsModal").modal('toggle');
 }

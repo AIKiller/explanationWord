@@ -11,9 +11,8 @@
 	//print_r($finalDiseaseSet);
 	$diseaseDetails = json_decode($_SESSION["diseaseDetails"],true);			//疾病详情 {"A01":{"marked":["symp8049","symp8050","symp8051","symp8052","symp8053"],"all_symp":["symp8049","symp8050","symp8051","symp8052","symp8053"]}}
 	$number_eliminated_diseases = $max_number_diseases-count($finalDiseaseSet);    //the total eliminated number of diseases in process;
-    echo $spec = $number_eliminated_diseases/$max_number_diseases; //Spec is short name of specificity.
+    $spec = $number_eliminated_diseases/$max_number_diseases; //Spec is short name of specificity.
 
-    //开始运行获取最终的疾病结果
     if(count($finalDiseaseSet)==0){//最终疾病结果为空时
 		$_SESSION["finalDieseaseDetails"] = array();
 		$finalDiseasePage["finalDisease"] = array();
@@ -49,19 +48,19 @@
 
 	$number = 0;
 	foreach($finalDiseaseDetailSet as $disease_site_id =>$disease_details){
-	    echo "disease_id:".$disease_site_id;
+	    //echo "disease_id:".$disease_site_id;
 		$diseaseInfo = getDiseaseName_PrevFromDB($disease_site_id);//查询数据库 获取疾病的名称和prev_rf。
 		$finalDiseaseToPage[$number]["disease_site_id"] = $disease_site_id;
 		$finalDiseaseToPage[$number]["disease_name"] = $diseaseInfo["disease_name"];
 		$finalDiseaseToPage[$number]["prev_rf"] = round($diseaseInfo["prev_rf"],2);
-        $p = round($diseaseInfo["prev_rf"],2)/10;
+        $p = round($diseaseInfo["prev_rf"],2)/1000;
 		$finalDiseaseToPage[$number]["status"] = $diseaseInfo["status"];
 		$finalDiseaseToPage[$number]["diseaseDescripted_num"] = count($disease_details["marked"]);
 		$finalDiseaseToPage[$number]["details"] = count($disease_details["marked"])."/".count($disease_details["all_symp"]);
 		$sens = count($disease_details["marked"])/count($disease_details["all_symp"]); //Sens is short name for sensitivity and is equal to R
 		$finalDiseaseToPage[$number]["percentage"] = (int)($sens*100);
-        $finalDiseaseToPage[$number]["PVW"]=getPVW($sens, $spec, $p);
-        $finalDiseaseToPage[$number]["NVW"]=getNVW ($sens, $spec, $p);
+        $finalDiseaseToPage[$number]["PVW"]=round(getPVW($sens, $spec, $p),3);
+        $finalDiseaseToPage[$number]["NVW"]=round(getNVW ($sens, $spec, $p),3);
 		$number ++;
 	}
     //获取两个参数的最大值
@@ -209,9 +208,7 @@
 
 
     function getPVW($sens, $spec, $p){
-        echo "sens:".$sens."---->";
-        echo $alfa = getAlfa($sens,$spec);
-        echo "<br>";
+        $alfa = getAlfa($sens,$spec);
         return (100*$alfa*$p)/($alfa*$p +1-$p);
     }
     //工具函数
