@@ -1,7 +1,10 @@
 <?php 
 	//根据时候含有用户名参数来判断用户时候登入。如果未登录则跳转登陆页面
 	if(!isset($_COOKIE["userName"])){
-		header("Location: http://".$_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"]."/explanationWord/GUI/login.php"); 
+		echo '未登录的用户';
+		$url  = "http://".$_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"]."/explanationWord/GUI/login.php";
+		#header("Location: $url"); 
+		echo "<script type='text/javascript'>window.location.replace('".$url."');</script>";
 		exit;
 	}
 	ini_set('date.timezone','Asia/Shanghai');//设置上海时区

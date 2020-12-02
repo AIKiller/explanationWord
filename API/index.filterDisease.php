@@ -46,5 +46,8 @@ $disease_site_id = array_values($disease_site_id);//数组键值重新索引
 
 $_SESSION["general_awareness"] = json_encode($disease_site_id);
 
+// 保存信息
+$_SESSION["userInformationSet"] = $_GET["userInformations"];
+
 echo count($disease_site_id);
 ?>

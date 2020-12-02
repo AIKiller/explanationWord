@@ -12,7 +12,6 @@ if(isset($_GET["sex"])&&$_GET["sex"]!=""){
 	$sex = $_GET["sex"];
 }
 $sql = "INSERT INTO `healthcondition` (`sex`, `healthCondition`, `date`) VALUES ('$sex', '$healthCondition', '".date('Y-m-d   H:i:s')."');";
-//echo $sql;
 $result = $db->query($sql);
 if($result){
 	echo  "1";

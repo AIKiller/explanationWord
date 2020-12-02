@@ -1,4 +1,6 @@
 <?php
+    include_once 'header.php';
+
 	$php_self = php_self();
 	if($php_self != "login.php"){
 		//先暂时这个样。			
@@ -30,20 +32,22 @@
 	$url = $_SERVER["REQUEST_URI"];
 	function getDB(){
 		global $dbName;
-		$host = "127.0.0.1";
+		$host = "222.173.149.146";
 		$usr = "root";
-		$psw = "";
+		$psw = "AILab@3DBySeasonTest";
+		$port = 12306;
 		//$psw = "";
 		 //= "Symptom_Cleaners";
-		$mysqli = new mysqli($host,$usr,$psw,$dbName) or die(mysqli_connect_error());
+		$mysqli = new mysqli($host,$usr,$psw,$dbName,$port) or die(mysqli_connect_error());
 		$mysqli->query("SET NAMES utf8");//与数据库建立utf8的连接。
 		return $mysqli;
 	}
 	function getDBbyDbName($dbName){
-		$host = "127.0.0.1";
+		$host = "222.173.149.146";
 		$usr = "root";
-		$psw = "";
-		$mysqli = new mysqli($host,$usr,$psw,$dbName) or die(mysqli_connect_error());
+		$psw = "AILab@3DBySeasonTest";
+		$port = 12306;
+		$mysqli = new mysqli($host,$usr,$psw,$dbName,$port) or die(mysqli_connect_error());
 		$mysqli->query("SET NAMES utf8");
 		return $mysqli;
 	}

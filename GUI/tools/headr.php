@@ -7,10 +7,10 @@
 	}else{
 		echo "语言版本加载失败";
 	}
-	if(isset($_COOKIE['session_id'])){
-		session_id($_COOKIE['session_id']);
-		session_start();
-	}
+//	if(isset($_COOKIE['session_id'])){
+//		session_id($_COOKIE['session_id']);
+//		session_start();
+// 	}
 	//$sid = $_SESSION["seesion_id"];
 	if(isset($_COOKIE['lang'])){
 		$_SESSION["lang"] = $_COOKIE['lang'];

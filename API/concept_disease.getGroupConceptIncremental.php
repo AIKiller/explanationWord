@@ -156,7 +156,7 @@ function getConceptName($concept_id){
 function getSympRelatedConcept($symptom_site_id){
 	global $db;
 	$sympRelatedConcept = array();
-	$sql ="SELECT concept_id FROM symp_concept WHERE site_id = '".$symptom_site_id."'";
+	echo $sql ="SELECT concept_id FROM symp_concept WHERE site_id = '".$symptom_site_id."'";
 	$result = $db->query($sql);
 	while($row = $result->fetch_array()){
 		$sympRelatedConcept[] = $row["concept_id"];

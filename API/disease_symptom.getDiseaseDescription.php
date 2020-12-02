@@ -24,12 +24,13 @@ function getDiseaseInfo($disease_site_id){
 
 function getICDandICPC($disease_site_id){
 	global $db;
-	$sql="SELECT icd,icpc FROM disease WHERE site_id ='".$disease_site_id."'";
+	$sql="SELECT icd,icpc,name_decode FROM disease WHERE site_id ='".$disease_site_id."'";
 	$result = $db->query($sql);
 	$row = $result->fetch_array();
 	return array(
 		"icd"=>$row["icd"],
-		"icpc"=>$row["icpc"]
+		"icpc"=>$row["icpc"],
+        "diseaseName"=>$row["name_decode"]
 	);
 }
 function getSympInfo($sympInfo){

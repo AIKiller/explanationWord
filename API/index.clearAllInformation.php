@@ -1,7 +1,4 @@
 <?php
-//include("../logic/common.inc.php");
-//echo $_GET["userInformations"];
-//print_r($_SESSION);
 session_id($_GET["sid"]);
 session_start();
 if(isset($_SESSION["general_awareness"])){

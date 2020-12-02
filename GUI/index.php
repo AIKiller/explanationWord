@@ -1,6 +1,7 @@
 <html>
 	<head>
-		<?php include("tools/headr.php");?>
+        <?php include("tools/headr.php");?>
+		<?php include('tools/index.config.php');?>
 		<title><?php echo $langText["SYSTEM_TITLE_NAME"];?></title>
 		<link type="text/css" rel="stylesheet" href="css/index.default.css" />
 		<link type="text/css" rel="stylesheet" href="tools/tooltip/tooltip.css" />
@@ -9,7 +10,6 @@
 		<script src="tools/tooltip/tooltip.js"></script>
 	</head>
 	<body>
-		<?php include('tools/index.config.php');?>
 		<table class="table" style="max-width:150%;width:120%;height:100%;margin-bottom:0px;">
 			<tr>
 				<td width="27%" ><iframe id="ifram.word_concept" row="5" name="ifram.word_concept" src="word_concept.php" border="0" height="100%" width="100%" frameborder=0 ></iframe></td>

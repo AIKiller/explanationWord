@@ -1,4 +1,5 @@
 <?php
+    include_once '../logic/header.php';
 	//过滤不可能疾病
 	session_id(trim($_GET["sid"]));
 	session_start();
