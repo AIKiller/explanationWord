@@ -70,7 +70,7 @@ function getConceptName($concept_id){
 	global $db;
 	$sql='SELECT keyword FROM concept WHERE concept_id="'.$concept_id.'" AND is_del > 0';
 	$result = $db->query($sql);
-	if($result->num_rows){
+	if($result && $result->num_rows){
 		$row = $result->fetch_array();
 		//echo $concept_id.":".$row["keyword"]."<br>";
 		return $row["keyword"];

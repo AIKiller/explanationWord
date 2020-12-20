@@ -9,7 +9,7 @@ foreach($finalDiseaseToPage as $index => $diseaseDetails){
 	$feedback_info[$index] = getICDandICPC($diseaseDetails["disease_site_id"]);
 	$feedback_info[$index]["name"] = $diseaseDetails["disease_name"].' '.$diseaseDetails["percentage"].'%';
 	$feedback_info[$index]["prev_rf"] = $diseaseDetails["prev_rf"];
-	$feedback_info[$index]["comb"] = $diseaseDetails["comb"];
+	# $feedback_info[$index]["comb"] = $diseaseDetails["comb"];
 	$feedback_info[$index]["symps"] = getSympInfo($finalDiseaseDetailSet[$diseaseDetails["disease_site_id"]]);
 }
 echo $_SESSION["feedback_info"] = json_encode($feedback_info);

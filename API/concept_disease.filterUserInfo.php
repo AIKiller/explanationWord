@@ -3,7 +3,13 @@
 	//过滤不可能疾病
 	session_id(trim($_GET["sid"]));
 	session_start();
-	$general_awareness = json_decode($_SESSION["general_awareness"],true);		//不可能的疾病（一维数组）
+//不可能的疾病（一维数组）
+	if(isset($_SESSION["general_awareness"])){
+        $general_awareness = json_decode($_SESSION["general_awareness"],true);
+    }else{
+        $general_awareness = [];
+    }
+
 
 	$finalDisease = json_decode($_SESSION["finalDisease"],true);				//获取疾病（一维数组）
 	//echo json_encode($finalDisease);

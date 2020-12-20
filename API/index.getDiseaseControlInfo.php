@@ -29,10 +29,10 @@ function getDiseaseControlInfo(){
 	while($row = $result->fetch_array()){
 		$temp = array();
 		if($row["ICPC"] != "?"||$row["prev_rf"]!=0){//为了过滤没有ICPC的疾病
-			$temp[] = $row["auto_id"];
+			$temp[] = (int)$row["auto_id"];
 			$temp[] = $icpcClass[strtolower(substr($row["ICPC"],0,1))];
-			$temp[] = "all diseases";
-			//$temp[] = 2;//设置默认的长度。
+			$temp[] = 2;//设置默认的长度。
+            $temp[] = "all diseases";
 			
 			$diseaseList[] = $temp;
 		}
@@ -48,10 +48,10 @@ function getFoundDiseaseControlInfo(){
 	while($row = $result->fetch_array()){
 		$temp = array();
 		if($row["ICPC"] != "?"&&$row["prev_rf"]!=0){//为了过滤没有ICPC的疾病
-			$temp[] = $row["auto_id"];
+			$temp[] = (int)$row["auto_id"];
 			$temp[] = $icpcClass[strtolower(substr($row["ICPC"],0,1))];
-			$temp[] = "found diseases";
 			$temp[] = floatval($row["prev_rf"]);
+            $temp[] = "found diseases";
 			$diseaseList[] = $temp;
 			//获取最大值，最小值；
 			if($row["prev_rf"]>$maxprev_rf){

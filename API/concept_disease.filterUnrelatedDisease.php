@@ -51,10 +51,14 @@
 			$sympsString=implode("','",$value);	//数组变成字符串，
 			$sql = "SELECT DISTINCT(disease_site_id) FROM `dis_symp` WHERE `symptom_site_id` in ( '".$sympsString."')";
 			$result = $db->query($sql);
-			while($row = $result->fetch_array())
-			{
-				$temp_unrelated_groupDisease[$key][] = $row["disease_site_id"];
-			}
+			if($result->num_rows > 0){
+                while($row = $result->fetch_array())
+                {
+                    $temp_unrelated_groupDisease[$key][] = $row["disease_site_id"];
+                }
+            }else{
+                $temp_unrelated_groupDisease[$key] = [];
+            }
 			//取交集
 			if($tempKey == 0)
 			{

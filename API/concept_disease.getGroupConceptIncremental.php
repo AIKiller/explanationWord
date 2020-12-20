@@ -11,14 +11,17 @@ $concepts = json_decode($_SESSION["concepts"],TRUE);
 
 $concept_site_ids = getConcept_site_ids($concepts);
 
-
 $diseaseDetails = json_decode($_SESSION["diseaseDetails"],TRUE);//疾病的详情（关联症状。已被描述的症状）
 	
 $finalDiseaseRelatedSymp = getDiseaseRelatedSymp($finalDisease);
-	
+
+
 //$groupConceptIncremental = getGroupConceptIncremental($finalDiseaseRelatedSymp);
 
 $symptom_site_id_Array = getGroupConceptIncremental($finalDiseaseRelatedSymp);
+# 去一下重复的症状id
+$symptom_site_id_Array = array_keys(array_flip($symptom_site_id_Array));
+
 $returnConceptArray = getGroupConceptIncremental_a($symptom_site_id_Array);
 
 $groupConceptIncremental = getGroupConceptIncremental_b($returnConceptArray);
@@ -101,11 +104,10 @@ function getGroupConceptIncremental($finalDiseaseRelatedSymp){
 function getGroupConceptIncremental_a($symptom_site_id)
 {
 	global $concept_site_ids;
-	
-	for($i=0;$i < count($symptom_site_id);$i++){														//循环每个$finalDiseaseRelatedSymp的值,循环次数1到70不等，我靠！
-		$sympRelatedConcept = getSympRelatedConcept($symptom_site_id[$i]);							//取出来所有症状对应的疾病，又是每个数组（ps：一个症状对应多个疾病）
+	for($i=0;$i < count($symptom_site_id);$i++){													//循环每个$finalDiseaseRelatedSymp的值,循环次数1到70不等，我靠！
+		$sympRelatedConcept = getSympRelatedConcept($symptom_site_id[$i]);					//取出来所有症状对应的疾病，又是每个数组（ps：一个症状对应多个疾病）
 		$returnArray[] = compareConcept($sympRelatedConcept);										//去掉不包括C_1的，并且把包含C_1 的里面的C_1
-		}
+	}
 	return $returnArray;
 }
 function getGroupConceptIncremental_b($returnConceptArray)
@@ -156,7 +158,7 @@ function getConceptName($concept_id){
 function getSympRelatedConcept($symptom_site_id){
 	global $db;
 	$sympRelatedConcept = array();
-	echo $sql ="SELECT concept_id FROM symp_concept WHERE site_id = '".$symptom_site_id."'";
+	$sql ="SELECT concept_id FROM symp_concept WHERE site_id = '".$symptom_site_id."'";
 	$result = $db->query($sql);
 	while($row = $result->fetch_array()){
 		$sympRelatedConcept[] = $row["concept_id"];
@@ -173,7 +175,6 @@ function compareConcept($sympRelatedConcept){
 		if(count($intersectArray) == count($group_concepts)){
 			$offestArray = array_diff($sympRelatedConcept,$group_concepts);
 			if(count($offestArray)>0){
-			
 				$sympRelatedConceptInremental[$group_index] = $offestArray;
 			
 			}

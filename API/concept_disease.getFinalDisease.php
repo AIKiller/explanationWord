@@ -10,7 +10,12 @@ $finalDiseaseToPage = array();
 $diseaseDetails = json_decode($_SESSION["diseaseDetails"],TRUE);
 $concepts = json_decode($_SESSION["concepts"],TRUE);
 $disease_site_ids = json_decode($_SESSION["disease_site_ids"],TRUE);
-$general_awareness = json_decode($_SESSION["general_awareness"],TRUE);
+//不可能的疾病（一维数组）
+if(isset($_SESSION["general_awareness"])){
+    $general_awareness = json_decode($_SESSION["general_awareness"],TRUE);
+}else{
+    $general_awareness = [];
+}
 
 if(isset($_SESSION["multi-morbidity"])&&$_SESSION["multi-morbidity"] == 2){
 	$_SESSION["multi-morbidity"] = 1;//用来标记疾病结果是否为零 需要循环
