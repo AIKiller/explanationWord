@@ -4,14 +4,13 @@
 	if(isset($_SESSION["userInformationSet"])){
 		$userInformationSet = json_decode($_SESSION["userInformationSet"],true);
 	}
-
 	$db = getDB();
 	$max_number_diseases = getMaxNumberDiseases();  //the total number of diseases in databases;
 	$finalDiseaseSet = json_decode($_SESSION["finalDisease"],true);				//获取疾病（一维数组）
-	//print_r($finalDiseaseSet);
 	$diseaseDetails = json_decode($_SESSION["diseaseDetails"],true);			//疾病详情 {"A01":{"marked":["symp8049","symp8050","symp8051","symp8052","symp8053"],"all_symp":["symp8049","symp8050","symp8051","symp8052","symp8053"]}}
 	$number_eliminated_diseases = $max_number_diseases-count($finalDiseaseSet);    //the total eliminated number of diseases in process;
     $spec = $number_eliminated_diseases/$max_number_diseases; //Spec is short name of specificity.
+    $age = !isset($userInformationSet["age"])?0:intval($userInformationSet["age"]);//储存用户的年龄信息
 
     if(count($finalDiseaseSet)==0){//最终疾病结果为空时
 		$_SESSION["finalDieseaseDetails"] = array();
@@ -44,17 +43,25 @@
 		$finalDiseaseDetailSet[$disease_site_id]["marked"] = array_unique($finalDiseaseDetailSet[$disease_site_id]["marked"]);
 	}
 
-
+    $diseasesInfo = getDiseaseName_PrevFromDB($finalDiseaseDetailSet);//查询数据库 获取疾病的名称和prev_rf。
 
 	$number = 0;
 	foreach($finalDiseaseDetailSet as $disease_site_id =>$disease_details){
 	    //echo "disease_id:".$disease_site_id;
-		$diseaseInfo = getDiseaseName_PrevFromDB($disease_site_id);//查询数据库 获取疾病的名称和prev_rf。
 		$finalDiseaseToPage[$number]["disease_site_id"] = $disease_site_id;
-		$finalDiseaseToPage[$number]["disease_name"] = $diseaseInfo["disease_name"];
-		$finalDiseaseToPage[$number]["prev_rf"] = round($diseaseInfo["prev_rf"],2);
-        $p = round($diseaseInfo["prev_rf"],2)/1000;
-		$finalDiseaseToPage[$number]["status"] = $diseaseInfo["status"];
+		$finalDiseaseToPage[$number]["disease_name"] = $diseasesInfo[$disease_site_id]["disease_name"];
+        $prev_rf = $diseasesInfo[$disease_site_id]["prev_rf"];
+        if($prev_rf< 0.5 && $prev_rf >0){//如果查询到的疾病的prev_rf小于0.5，则认为该疾病为罕见疾病，则进行特殊显示（红色） 默认为绿色
+            $finalDiseaseToPage[$number]["status"] ="rare";//css标签名字-》翠绿色
+		}else{
+            $finalDiseaseToPage[$number]["status"] ="normal";//css标签名字-》绿色
+		}
+		if($diseasesInfo[$disease_site_id]["lethality"]){
+            $finalDiseaseToPage[$number]["status"] = "lethality";//css标签名字-红色
+		}
+
+		$finalDiseaseToPage[$number]["prev_rf"] = round($prev_rf,2);
+        $p = round($prev_rf,2)/1000;
 		$finalDiseaseToPage[$number]["diseaseDescripted_num"] = count($disease_details["marked"]);
 		$finalDiseaseToPage[$number]["details"] = count($disease_details["marked"])."/".count($disease_details["all_symp"]);
 		$sens = count($disease_details["marked"])/count($disease_details["all_symp"]); //Sens is short name for sensitivity and is equal to R
@@ -66,8 +73,6 @@
     //获取两个参数的最大值
 	$prevMax = getMaxFromArray($finalDiseaseToPage,"prev_rf");
 	$percentageMax = getMaxFromArray($finalDiseaseToPage,"percentage");
-
-
     //准备要在页面显示的数组
 	$_SESSION["finalDieseaseDetails"] = json_encode($finalDiseaseDetailSet);
 	$_SESSION["finalDieseaseToPage"] = json_encode($finalDiseaseToPage);
@@ -77,12 +82,13 @@
 
 
 	//以下为公用函数
-	function getDiseaseName_PrevFromDB($disease_site_id){
-		global $db,$userInformationSet;
-		$age = !isset($userInformationSet["age"])?0:$userInformationSet["age"];//储存用户的年龄信息
-		//echo $age."<br>";
+	function getDiseaseName_PrevFromDB($finalDiseaseDetailSet){
+		global $db,$age;
+		$disease_site_ids = array_keys($finalDiseaseDetailSet);
+		$query_disease_site_ids = "('".implode("','",$disease_site_ids)."')";
+		$diseasesInfo = array();
 		$num = 0;//记录查询到的结果数目
-		if(is_numeric($age)){
+		if($age !== 0){
 			//如果用户保存了自己的年龄信息，查询数据库获取信息
 			$sql = "SELECT name_decode,disease_agelevel.prev,lethality,rf FROM disease_agelevel INNER JOIN disease ON disease_agelevel.site_id=disease.icpc  WHERE disease.site_id ='".$disease_site_id."'and max_age>'".$age."' and min_age<'".$age."'";
 			$result = $db->query($sql);
@@ -102,27 +108,26 @@
 				}
 				
 			}
-		}
-		if($age == ""||$num == 0){
-			//如果用户未保存自己的年龄信息，则读取默认值
-			$sql = "SELECT name_decode,prev_rf,lethality FROM disease WHERE site_id ='".$disease_site_id."'";
-			$result = $db->query($sql);
-			$row = $result->fetch_array();
-			$return_diseaseArr = array("disease_name"=>$row["name_decode"],
-							"prev_rf" => $row["prev_rf"],
-							"lethality"=>$row["lethality"]
-					);
-		}
-		if($return_diseaseArr["prev_rf"]< 0.5 && $return_diseaseArr["prev_rf"] >0){//如果查询到的疾病的prev_rf小于0.5，则认为该疾病为罕见疾病，则进行特殊显示（红色） 默认为绿色
-			$return_diseaseArr["status"] ="rare";//css标签名字-》翠绿色
 		}else{
-			$return_diseaseArr["status"] ="normal";//css标签名字-》绿色
+			//如果用户未保存自己的年龄信息，则读取默认值
+			$sql = "SELECT site_id,name_decode,prev_rf,lethality FROM disease WHERE site_id in {$query_disease_site_ids}";
+			$result = $db->query($sql);
+			while($row = $result->fetch_array()){
+                $diseasesInfo[$row['site_id']] = array("disease_name"=>$row["name_decode"],
+                    "prev_rf" => $row["prev_rf"],
+                    "lethality"=>$row["lethality"]
+                );
+            }
 		}
-		if($return_diseaseArr["lethality"]){
-			$return_diseaseArr["status"] = "lethality";//css标签名字-红色
-		
-		}
-		return $return_diseaseArr;
+//		if($return_diseaseArr["prev_rf"]< 0.5 && $return_diseaseArr["prev_rf"] >0){//如果查询到的疾病的prev_rf小于0.5，则认为该疾病为罕见疾病，则进行特殊显示（红色） 默认为绿色
+//			$return_diseaseArr["status"] ="rare";//css标签名字-》翠绿色
+//		}else{
+//			$return_diseaseArr["status"] ="normal";//css标签名字-》绿色
+//		}
+//		if($return_diseaseArr["lethality"]){
+//			$return_diseaseArr["status"] = "lethality";//css标签名字-红色
+//		}
+		return $diseasesInfo;
 	}
 
 	//获取分组疾病的id集合。
