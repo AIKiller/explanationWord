@@ -7,7 +7,7 @@
 	if(isset($_SESSION["general_awareness"])){
         $general_awareness = json_decode($_SESSION["general_awareness"],true);
     }else{
-        $general_awareness = [];
+        $general_awareness = array();
     }
 
 

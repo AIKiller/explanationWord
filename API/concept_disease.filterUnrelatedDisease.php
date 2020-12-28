@@ -57,7 +57,7 @@
                     $temp_unrelated_groupDisease[$key][] = $row["disease_site_id"];
                 }
             }else{
-                $temp_unrelated_groupDisease[$key] = [];
+                $temp_unrelated_groupDisease[$key] = array();
             }
 			//取交集
 			if($tempKey == 0)

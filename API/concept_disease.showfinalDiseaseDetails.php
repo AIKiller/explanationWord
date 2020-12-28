@@ -202,8 +202,13 @@
 	//获取疾病的最大数目
     function getMaxNumberDiseases(){
 	    global $db;
-	    $sql = "SELECT COUNT(1) FROM disease";
-	    return $db->query($sql)->fetch_array()[0];
+	    $maxNumber = 0;
+	    $sql = "SELECT COUNT(1) as number FROM disease";
+	    $result = $db->query($sql);
+	    while ($row=$result->fetch_array()){
+            $maxNumber = $row['number'];
+        }
+	    return $maxNumber;
     }
 
 

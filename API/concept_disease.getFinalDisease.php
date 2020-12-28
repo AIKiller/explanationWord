@@ -14,7 +14,7 @@ $disease_site_ids = json_decode($_SESSION["disease_site_ids"],TRUE);
 if(isset($_SESSION["general_awareness"])){
     $general_awareness = json_decode($_SESSION["general_awareness"],TRUE);
 }else{
-    $general_awareness = [];
+    $general_awareness = array();
 }
 
 if(isset($_SESSION["multi-morbidity"])&&$_SESSION["multi-morbidity"] == 2){

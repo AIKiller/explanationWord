@@ -4,6 +4,6 @@
 	</head>
 	<body>
 		<script>
-			self.location='GUI/index.php';
+			self.location='GUI/#/';
 		</script>
 </html>
