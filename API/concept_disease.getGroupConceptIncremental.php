@@ -2,7 +2,7 @@
 include("../logic/common.inc.php");
 $db = getDB();
 $finalDisease = json_decode($_SESSION["finalDisease"],TRUE);//最终疾病数组
-
+$globalConceptName = array();
 if(count($finalDisease) == 0){//如果最最终疾病的数组为空，则退出脚本
 	echo json_encode(array());
 	exit;
@@ -23,8 +23,8 @@ $symptom_site_id_Array = getGroupConceptIncremental($finalDiseaseRelatedSymp);
 $symptom_site_id_Array = array_keys(array_flip($symptom_site_id_Array));
 
 $returnConceptArray = getGroupConceptIncremental_a($symptom_site_id_Array);
-
 $groupConceptIncremental = getGroupConceptIncremental_b($returnConceptArray);
+$groupConceptIncremental = getConceptsName($groupConceptIncremental);
 
 echo json_encode($groupConceptIncremental);			//输出到前台的，不是测试的，别删
 /**
@@ -43,52 +43,7 @@ function getDiseaseRelatedSymp($finalDisease){
 	}
 	return $diseaseRelatedSymp;
 }
-/**
-* getGroupConceptIncremental*
-* 获取分组下每个concept组合的扩展单词
-* @global 
-* @param array String $finalDiseaseRelatedSymp
-* @return array 
-*/
-/*
-function getGroupConceptIncremental($finalDiseaseRelatedSymp){
-	global $concept_site_ids;
-	$groupConceptIncrement = array();
-	
-	foreach($finalDiseaseRelatedSymp as $disease_site_id => $symps){								//以pain为例，找到$finalDiseaseRelatedSymp一共549个，循环549次
-	
-		foreach($symps as $symptom_site_id){														//循环每个$finalDiseaseRelatedSymp的值,循环次数1到70不等，我靠！
-			$sympRelatedConcept = getSympRelatedConcept($symptom_site_id);							//取出来所有症状对应的疾病，又是每个数组（ps：一个症状对应多个疾病）
-			$returnArray = compareConcept($sympRelatedConcept);										//去掉不包括C_1的，并且把包含C_1 的里面的C_1
-			//echo json_encode($returnArray);
 
-			if(count($returnArray)>0){
-				foreach($returnArray as $group_index => $conceptIncrement){
-					foreach($conceptIncrement as $concept_id){
-						if(isset($concept_site_ids[$group_index][$concept_id])) continue;
-						$conceptName = getConceptName($concept_id);
-						
-						if(isset($groupConceptIncrement[$group_index][$conceptName ])){
-						
-							$groupConceptIncrement[$group_index][$conceptName] += 1;
-						
-						}else{
-						
-							$groupConceptIncrement[$group_index][$conceptName] = 1;
-						
-						}
-					
-					}
-					arsort($groupConceptIncrement[$group_index]);
-				}
-			
-			}
-		}
-	
-	}
-	return $groupConceptIncrement;
-}  
-*/
 function getGroupConceptIncremental($finalDiseaseRelatedSymp){
 	
 	$symptom_site_id_Array = array();
@@ -101,13 +56,15 @@ function getGroupConceptIncremental($finalDiseaseRelatedSymp){
 	}
 	return $symptom_site_id_Array;
 }
-function getGroupConceptIncremental_a($symptom_site_id)
-{
-	global $concept_site_ids;
-	for($i=0;$i < count($symptom_site_id);$i++){													//循环每个$finalDiseaseRelatedSymp的值,循环次数1到70不等，我靠！
-		$sympRelatedConcept = getSympRelatedConcept($symptom_site_id[$i]);					//取出来所有症状对应的疾病，又是每个数组（ps：一个症状对应多个疾病）
-		$returnArray[] = compareConcept($sympRelatedConcept);										//去掉不包括C_1的，并且把包含C_1 的里面的C_1
-	}
+function getGroupConceptIncremental_a($symptom_site_ids){
+    $returnArray = array();
+    $sympRelatedConcepts = getSympRelatedConcept($symptom_site_ids);
+    // print_r($sympRelatedConcepts);
+    foreach ($symptom_site_ids as $symptom_site_id){
+        if(isset($sympRelatedConcepts[$symptom_site_id])){
+            $returnArray[] = compareConcept($sympRelatedConcepts[$symptom_site_id]);
+        }
+    }
 	return $returnArray;
 }
 function getGroupConceptIncremental_b($returnConceptArray)
@@ -116,24 +73,13 @@ function getGroupConceptIncremental_b($returnConceptArray)
 	for($i=0;$i < count($returnConceptArray);$i++){
 	if(count($returnConceptArray[$i])>0){
 			foreach($returnConceptArray[$i] as $group_index => $conceptIncrement){
-				foreach($conceptIncrement as $concept_id){					
+				foreach($conceptIncrement as $concept_id){
 					if(isset($concept_site_ids[$group_index][$concept_id])) continue;
-					$conceptName = getConceptName($concept_id);
-					//echo $conceptName."->".$concept_id;
-					if($conceptName === false) continue;
-					
-					if(isset($groupConceptIncrement[$group_index][$conceptName])){
-					
-						$groupConceptIncrement[$group_index][$conceptName] += 1;
-					
+					if(isset($groupConceptIncrement[$group_index][$concept_id])){
+						$groupConceptIncrement[$group_index][$concept_id] += 1;
 					}else{
-					
-						$groupConceptIncrement[$group_index][$conceptName] = 1;
-					
+						$groupConceptIncrement[$group_index][$concept_id] = 1;
 					}
-					//echo "<pre>";
-					//print_r($groupConceptIncrement);
-					//echo "</pre>";
 				}
 				if(isset($groupConceptIncrement[$group_index])){
 					arsort($groupConceptIncrement[$group_index]);
@@ -143,25 +89,40 @@ function getGroupConceptIncremental_b($returnConceptArray)
 	}
 	return 	$groupConceptIncrement;
 }
-function getConceptName($concept_id){
-	global $db;
-	$sql='SELECT keyword FROM concept WHERE concept_id="'.$concept_id.'" AND is_del >0';
-	$result = $db->query($sql);
-	if($result->num_rows){
-		$row = $result->fetch_array();
-		return $row["keyword"];
-	}else{
-		return false;
-	}
+function getConceptsName($groupConceptIncremental){
+	global $db,$globalConceptName;
+	$resultArray = array();
+	foreach ($groupConceptIncremental as $conceptIncremental){
+        // 获取到key的数组，一次性查询 当前分组下的所有concept信息
+        $concept_ids = array_keys($conceptIncremental);
+        $query_concept_ids = '("'.implode($concept_ids,'","').'")';//拼接数组
+        $sql="SELECT concept_id,keyword FROM concept WHERE concept_id in ".$query_concept_ids." AND is_del >0";
+        $result = $db->query($sql);
+        if($result->num_rows > 0){
+            while ($row = $result->fetch_array()){
+                $globalConceptName[$row["concept_id"]] = $row["keyword"];
+            }
+        }
+        // 重新覆盖
+        $tempConceptIncremental = array();
+        foreach ($conceptIncremental as $concept_id => $term){
+            if(isset($globalConceptName[$concept_id])){
+                $tempConceptIncremental[$globalConceptName[$concept_id]] = $term;
+            }
+        }
+        $resultArray[] = $tempConceptIncremental;
+    }
+	return $resultArray;
 }
 /*	应该是取出来所有症状对应的疾病	*/
-function getSympRelatedConcept($symptom_site_id){
+function getSympRelatedConcept($symptom_site_ids){
 	global $db;
+    $query_symptom_site_ids = '("'.implode($symptom_site_ids,'","').'")';//拼接数组
 	$sympRelatedConcept = array();
-	$sql ="SELECT concept_id FROM symp_concept WHERE site_id = '".$symptom_site_id."'";
+	$sql ="SELECT site_id,concept_id FROM symp_concept WHERE site_id in ".$query_symptom_site_ids;
 	$result = $db->query($sql);
 	while($row = $result->fetch_array()){
-		$sympRelatedConcept[] = $row["concept_id"];
+		$sympRelatedConcept[$row["site_id"]][] = $row["concept_id"];
 	}
 	return $sympRelatedConcept;
 }
