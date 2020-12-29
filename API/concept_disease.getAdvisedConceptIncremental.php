@@ -7,15 +7,14 @@ if(count($finalDisease) == 0){//如果最最终疾病的数组为空，则退出
 	exit;
 }
 $concepts = json_decode($_SESSION["concepts"],TRUE);
-	
+// 获取concept集合
 $concept_site_ids = getConcept_site_ids($concepts);
 
 $diseaseDetails = json_decode($_SESSION["diseaseDetails"],TRUE);//疾病的详情（关联症状。已被描述的症状）
-	
+// 根据最终疾病获取症状合集
 $SymptomSet = getSymptomSet($finalDisease);
-
+// 获取建议的concept列表
 $advisedConceptIncremental = getAdvisedConceptIncremental($SymptomSet);
-
 //echo "<pre>";
 //print_r($advisedConceptIncremental);
 //echo "</pre>";
@@ -48,17 +47,11 @@ function getAdvisedConceptIncremental($SymptomSet){
 	global $concept_site_ids;
 	$advisedConceptIncremental = array();
 	$sympsRelatedConcepts = getSympsRelatedConcepts($SymptomSet);
-	//echo "<pre>";
-	//print_r($sympsRelatedConcepts);
-	//echo "</pre>";
-	
+    $conceptsName = getConceptsName($sympsRelatedConcepts);
+	// 循环取值
 	foreach($sympsRelatedConcepts as $concept_site_id => $num){
 		if(!in_array($concept_site_id,$concept_site_ids)){
-			$conceptName = getConceptName($concept_site_id);
-			if($conceptName === false){
-				continue;
-			}
-			$advisedConceptIncremental[$conceptName] = $num;
+			$advisedConceptIncremental[$conceptsName[$concept_site_id]] = $num;
 		}
 	}
 	
@@ -66,17 +59,21 @@ function getAdvisedConceptIncremental($SymptomSet){
 
 	return $advisedConceptIncremental;
 }
-function getConceptName($concept_id){
+function getConceptsName($sympsRelatedConcepts){
 	global $db;
-	$sql='SELECT keyword FROM concept WHERE concept_id="'.$concept_id.'" AND is_del > 0';
+    // 组装查询条件
+    $conceptsName = array();
+    $advisedConceptIds = array_keys($sympsRelatedConcepts);
+    $query_advisedConceptIds = "('".implode($advisedConceptIds,"','")."')";
+	$sql='SELECT concept_id,keyword FROM concept WHERE concept_id in '.$query_advisedConceptIds.' AND is_del > 0';
 	$result = $db->query($sql);
-	if($result && $result->num_rows){
-		$row = $result->fetch_array();
-		//echo $concept_id.":".$row["keyword"]."<br>";
-		return $row["keyword"];
-	}else{
-		return false;
+	if($result && $result->num_rows > 0){
+		while ($row = $result->fetch_array()){
+            $conceptsName[$row['concept_id']] = $row['keyword'];
+
+        }
 	}
+    return $conceptsName;
 }
 function getSympsRelatedConcepts($symptom_site_ids){
 	global $db;

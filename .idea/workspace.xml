@@ -19,41 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4da1197a-df58-4237-be24-e1bf51704ad5" name="Default" comment="修改后台接口逻辑">
+    <list default="true" id="4da1197a-df58-4237-be24-e1bf51704ad5" name="Default" comment="优化每个concept下扩展单词的获取速度，由超过30秒的超时运行减少到1秒。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/concept_disease.filterUnrelatedDisease.php" beforeDir="false" afterPath="$PROJECT_DIR$/API/concept_disease.filterUnrelatedDisease.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/concept_disease.filterUserInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/API/concept_disease.filterUserInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/concept_disease.getFinalDisease.php" beforeDir="false" afterPath="$PROJECT_DIR$/API/concept_disease.getFinalDisease.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/concept_disease.showfinalDiseaseDetails.php" beforeDir="false" afterPath="$PROJECT_DIR$/API/concept_disease.showfinalDiseaseDetails.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/concept_disease.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/css/index.default.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/css/word_concept.default.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/disease_symptom.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/js/Chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/js/H5Draw.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/js/echarts.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/js/function.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/js/highcharts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/js/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/login.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/headr.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/index.config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/index.modal.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/tooltip/Thumbs.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/tooltip/closeBtn.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/tooltip/closeBtn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/tooltip/loading.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/tooltip/tooltip.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/tools/tooltip/tooltip.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/word_concept.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/concept_disease.getAdvisedConceptIncremental.php" beforeDir="false" afterPath="$PROJECT_DIR$/API/concept_disease.getAdvisedConceptIncremental.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +102,7 @@
       <workItem from="1607927707703" duration="4455000" />
       <workItem from="1607947629026" duration="13082000" />
       <workItem from="1608277402186" duration="20946000" />
-      <workItem from="1609147712222" duration="1619000" />
+      <workItem from="1609147712222" duration="9121000" />
     </task>
     <task id="LOCAL-00001" summary="修改新的参数版本的后台脚本，计算结果有些偏差，需要进行确认。">
       <created>1534774995518</created>
@@ -164,7 +132,28 @@
       <option name="project" value="LOCAL" />
       <updated>1608454324428</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="解决  教授电脑的兼容问题">
+      <created>1609149466631</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1609149466631</updated>
+    </task>
+    <task id="LOCAL-00006" summary="提高最终疾病的获取速度，由10秒减少到2秒">
+      <created>1609158484877</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1609158484877</updated>
+    </task>
+    <task id="LOCAL-00007" summary="优化每个concept下扩展单词的获取速度，由超过30秒的超时运行减少到1秒。">
+      <created>1609161218419</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1609161218419</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +194,10 @@
     <MESSAGE value="增加PVW和NVW参数" />
     <MESSAGE value="统一后台的数据接口格式" />
     <MESSAGE value="修改后台接口逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改后台接口逻辑" />
+    <MESSAGE value="解决  教授电脑的兼容问题" />
+    <MESSAGE value="提高最终疾病的获取速度，由10秒减少到2秒" />
+    <MESSAGE value="优化每个concept下扩展单词的获取速度，由超过30秒的超时运行减少到1秒。" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化每个concept下扩展单词的获取速度，由超过30秒的超时运行减少到1秒。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="138" y="77" width="1228" height="688" key="DiffContextDialog" timestamp="1608453435338">
@@ -225,18 +217,19 @@
     </state>
     <state x="2405" y="131" key="RollbackChangesDialog/0.0.1536.824/1920.0.1440.860@1920.0.1440.860" timestamp="1607149920279" />
     <state x="517" y="126" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1608453429886" />
-    <state x="333" y="155" key="Vcs.Push.Dialog.v2" timestamp="1608454325947">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2232" y="162" key="Vcs.Push.Dialog.v2" timestamp="1609161230822">
+      <screen x="1920" y="0" width="1440" height="860" />
     </state>
-    <state x="2232" y="162" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1440.860@1920.0.1440.860" timestamp="1606912095457" />
+    <state x="2232" y="162" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1440.860@1920.0.1440.860" timestamp="1609161230822" />
     <state x="333" y="155" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1608454325947" />
     <state x="2341" y="31" width="598" height="798" key="find.popup" timestamp="1607148937342">
       <screen x="1920" y="0" width="1440" height="860" />
     </state>
     <state x="2341" y="31" width="598" height="798" key="find.popup/0.0.1536.824/1920.0.1440.860@1920.0.1440.860" timestamp="1607148937342" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1608386731051">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2324" y="151" width="672" height="708" key="search.everywhere.popup" timestamp="1609208975316">
+      <screen x="1920" y="0" width="1440" height="860" />
     </state>
+    <state x="2324" y="151" width="672" height="708" key="search.everywhere.popup/0.0.1536.824/1920.0.1440.860@1920.0.1440.860" timestamp="1609208975316" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1608386731051" />
   </component>
 </project>
