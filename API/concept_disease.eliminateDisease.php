@@ -52,8 +52,8 @@ function calculateSimilarityAmongDiseases($finalDiseases){
         // 主疾病
         $mainDisease = $finalDiseases[0]["disease_name"];
         $sideDisease = $disease["disease_name"];
-        $similarity = similar_text($mainDisease,$sideDisease);
-        $finalDiseases[$k]['similarity'] = $similarity;
+        similar_text($mainDisease,$sideDisease,$similarity);
+        $finalDiseases[$k]['similarity'] = round($similarity,2);
     }
     return $finalDiseases;
 }
@@ -79,12 +79,13 @@ function getSymptomsFromDiseaseSiteId($diseaseSiteId){
 
 function getRelatedConceptsBySymptoms($symptoms){
     global $db;
-    $newSymptoms = [];
+    $newSymptoms = array();
     foreach ($symptoms as $symptom){
+        $symptom['concepts'] = array();
         $sympSiteId = $symptom['sympSiteId'];
         $sql = "SELECT DISTINCT concept.concept_id as concept_id,concept.keyword as keyword FROM symp_concept LEFT JOIN concept ON concept.concept_id = symp_concept.concept_id WHERE site_id = '{$sympSiteId}'";
         $result = $db->query($sql);
-        if($result){
+        if($result && $result->num_rows>0){
             while ($row = $result->fetch_array()) {
                 $temp = array();
                 $temp['conceptId'] = $row['concept_id'];

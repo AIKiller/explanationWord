@@ -32,7 +32,7 @@
 		$i = 0;
 		if(count($diseaseSimilarities)==0){
 			echo "<h2>The disease does not have relationship symptoms!</h2>";
-			continue;
+			// continue;
 		}
 		while($i<$N){
 			$disease_site_id = key($diseaseSimilarities);

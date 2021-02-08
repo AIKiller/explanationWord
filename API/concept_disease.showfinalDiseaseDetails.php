@@ -1,4 +1,6 @@
 <?php
+
+
 	include("../logic/common.inc.php");	
     //获取用户基本信息
 	if(isset($_SESSION["userInformationSet"])){
@@ -70,13 +72,27 @@
         $finalDiseaseToPage[$number]["NVW"]=round(getNVW ($sens, $spec, $p),3);
 		$number ++;
 	}
+    /**
+     *  新增计算PVW值最高的疾病和其他疾病之间的相似度 开始
+     */
+    // 最终疾病的个数大于1
+    if(count($finalDiseaseToPage)>0){
+        // 获取PVW值最高的疾病信息
+        $sortFinalDiseases = arraySort($finalDiseaseToPage,'PVW',SORT_DESC);
+        $mainDisease = $sortFinalDiseases[0];
+        // 计算每个疾病和PVW值最高的疾病的相似度
+        $finalDiseaseDetailWithSim = calculateSimilarityAmongDiseases($mainDisease,$finalDiseaseToPage);
+    }
+    /**
+     * 结束
+     */
     //获取两个参数的最大值
 	$prevMax = getMaxFromArray($finalDiseaseToPage,"prev_rf");
 	$percentageMax = getMaxFromArray($finalDiseaseToPage,"percentage");
     //准备要在页面显示的数组
 	$_SESSION["finalDieseaseDetails"] = json_encode($finalDiseaseDetailSet);
-	$_SESSION["finalDieseaseToPage"] = json_encode($finalDiseaseToPage);
-	$finalDiseasePage["finalDisease"] = $finalDiseaseToPage;
+	$_SESSION["finalDieseaseToPage"] = json_encode($finalDiseaseDetailWithSim);
+	$finalDiseasePage["finalDisease"] = $finalDiseaseDetailWithSim;
 	$finalDiseasePage["multi-morbidity"] = $_SESSION["multi-morbidity"];
 	echo json_encode($finalDiseasePage);
 
@@ -228,6 +244,37 @@
 
     function getNVW ($sens, $spec, $p){
         return 100*(1-$p) * $spec/((1-$p)*$spec + (1-$sens)*$p);
+    }
+    /**
+     * 二维数组根据某个字段排序
+     * @param array $array 要排序的数组
+     * @param string $keys   要排序的键字段
+     * @param string $sort  排序类型  SORT_ASC     SORT_DESC
+     * @return array 排序后的数组
+     */
+    function arraySort($array, $keys, $sort = SORT_DESC) {
+        $keysValue = [];
+        foreach ($array as $k => $v) {
+            $keysValue[$k] = $v[$keys];
+        }
+        array_multisort($keysValue, $sort, $array);
+        return $array;
+    }
+
+    /**
+     * 获取与第一个疾病相似度最低的那个疾病id
+     * @param array $finalDiseases 最终疾病的详细疾病信息
+     * @param array $mainDisease 主疾病数组
+     */
+    function calculateSimilarityAmongDiseases($mainDisease,$finalDiseases){
+        foreach ($finalDiseases as $k=>$disease){
+            // 主疾病
+            $mainDiseaseName = $mainDisease["disease_name"];
+            $sideDiseaseName = $disease["disease_name"];
+            similar_text($mainDiseaseName,$sideDiseaseName,$percent);
+            $finalDiseases[$k]['similarity'] = round($percent,2);
+        }
+        return $finalDiseases;
     }
 
 ?>
